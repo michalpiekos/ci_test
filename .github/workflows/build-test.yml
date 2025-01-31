@@ -14,6 +14,15 @@ jobs:
         with:
           submodules: true
           fetch-depth: 1
+          
+      - name: Debug Paths
+        run: |
+          echo "Listing ~/workspace:"
+          ls -la ~/workspace
+          echo "Listing ~/workspace/zephyr:"
+          ls -la ~/workspace/zephyr
+          echo "Listing ~/workspace/modules:"
+          ls -la ~/workspace/modules
 
       - name: Run Zephyr Docker Build
         run: |
