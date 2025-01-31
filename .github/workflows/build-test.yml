@@ -18,7 +18,7 @@ jobs:
       - name: Debug Paths
         run: |
           echo "Listing ~/workspace:"
-          ls -la /workspace
+          ls -la ~/workspace
 
       - name: Docker Paths
         run: |
