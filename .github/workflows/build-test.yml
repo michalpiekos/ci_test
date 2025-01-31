@@ -17,12 +17,13 @@ jobs:
           
       - name: Debug Paths
         run: |
-          echo "Listing ~/work:"
-          ls -la /work
-          echo "Listing ~/workspace/zephyr:"
-          ls -la ~/workspace/zephyr
-          echo "Listing ~/workspace/modules:"
-          ls -la ~/workspace/modules
+          echo "Listing ~/workspace:"
+          ls -la /workspace
+
+      - name: Docker Paths
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr:latest \
+            ls -la /workdir
 
       - name: Run Zephyr Docker Build
         run: |
