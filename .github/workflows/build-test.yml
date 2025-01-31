@@ -35,3 +35,8 @@ jobs:
           docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr \
             west flash
 
+      - name: Run tests
+        run: |
+          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr \
+            ./example-application/tests/run_tests.sh
+
