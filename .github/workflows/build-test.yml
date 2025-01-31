@@ -28,7 +28,7 @@ jobs:
       - name: Run Zephyr Docker Build
         run: |
           docker run --rm -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr:latest \
-            west build -b stm32_min_dev@blue -s .
+            west build -b stm32_min_dev@blue -s example-application/app -p
 
       - name: Flash and Run Tests
         run: |
