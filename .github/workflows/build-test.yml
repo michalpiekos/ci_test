@@ -32,6 +32,6 @@ jobs:
 
       - name: Flash and Run Tests
         run: |
-          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -w /workdir mmpzephyr \
+          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr \
             west flash
 
