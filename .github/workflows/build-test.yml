@@ -14,18 +14,24 @@ jobs:
         with:
           submodules: true
           fetch-depth: 1
-
-      - name: Create Zephyr symlink
+          
+      - name: Debug Paths
         run: |
-          ln -s ~/workspace/zephyr zephyr && ln -s ~/workspace/modules modules
+          echo "Listing ~/workspace:"
+          ls -la ~/workspace
+
+      - name: Docker Paths
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr:latest \
+            ls -la /workdir
 
       - name: Run Zephyr Docker Build
         run: |
-          docker run --rm -v ${{ github.workspace }}:/work -w /work mmpzephyr:latest \
-            west build -b stm32_min_dev@blue -s .
+          docker run --rm -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr:latest \
+            west build -b stm32_min_dev@blue -s example-application/app -p
 
       - name: Flash and Run Tests
         run: |
-          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/work -w /work mmpzephyr \
+          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr \
             west flash
 
