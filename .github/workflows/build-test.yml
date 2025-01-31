@@ -3,11 +3,14 @@ name: Zephyr Build & Test
 on:
   pull_request:
     branches:
-      - main  # Adjust this to your default branch
+      - main
+    paths:
+      - 'example-application/app/**'
+      - '.github/**'
 
 jobs:
   build_and_test:
-    runs-on: self-hosted  # Ensure your runner has this label
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
