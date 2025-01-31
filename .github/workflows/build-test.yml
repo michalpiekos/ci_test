@@ -15,13 +15,9 @@ jobs:
           submodules: true
           fetch-depth: 1
 
-      - name: Create Zephyr symlink
-        run: |
-          ln -s ~/workspace/zephyr zephyr && ln -s ~/workspace/modules modules
-
       - name: Run Zephyr Docker Build
         run: |
-          docker run --rm -v ${{ github.workspace }}:/work -w /work mmpzephyr:latest \
+          docker run --rm -v ${{ github.workspace }}:/work -v ~/workspace/zephyr:/work/zephyr -v ~/workspace/modules:/work/modules -w /work mmpzephyr:latest \
             west build -b stm32_min_dev@blue -s .
 
       - name: Flash and Run Tests
