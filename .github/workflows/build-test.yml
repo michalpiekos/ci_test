@@ -26,11 +26,11 @@ jobs:
 
       - name: Run Zephyr Docker Build
         run: |
-          docker run --rm -v ${{ github.workspace }}:/work -v ~/workspace/zephyr:/work/zephyr -v ~/workspace/modules:/work/modules -w /work mmpzephyr:latest \
+          docker run --rm -v ${{ github.workspace }}:/workdir -v ~/workspace/zephyr:/workdir/zephyr -v ~/workspace/modules:/workdir/modules -w /workdir mmpzephyr:latest \
             west build -b stm32_min_dev@blue -s .
 
       - name: Flash and Run Tests
         run: |
-          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/work -w /work mmpzephyr \
+          docker run --rm --privileged -v /dev/serial:/dev/serial -v ${{ github.workspace }}:/workdir -w /workdir mmpzephyr \
             west flash
 
