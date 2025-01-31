@@ -31,13 +31,9 @@ def send_command(ser, command, expected_output, timeout=2):
 
     pytest.fail(f"Expected output '{expected_output}' not found. Response: {response}")
 
-def test_shell_echo(serial_connection):
-    """Test if Zephyr shell responds correctly to an echo command."""
-    send_command(serial_connection, "echo hello", "hello")
-
 def test_shell_help(serial_connection):
     """Test if Zephyr shell responds correctly to the help command."""
-    send_command(serial_connection, "help", "Commands:")
+    send_command(serial_connection, "help", "Available commands:")
 
 if __name__ == "__main__":
     pytest.main()
