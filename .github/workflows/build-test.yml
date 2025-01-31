@@ -17,8 +17,8 @@ jobs:
           
       - name: Debug Paths
         run: |
-          echo "Listing ~/workspace:"
-          ls -la ~/workspace
+          echo "Listing ~/work:"
+          ls -la /work
           echo "Listing ~/workspace/zephyr:"
           ls -la ~/workspace/zephyr
           echo "Listing ~/workspace/modules:"
